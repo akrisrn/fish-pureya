@@ -21,7 +21,13 @@ def extract(f, d, t):
 
 def extract_zip(f, d):
     zip_file = zipfile.ZipFile(f)
-    zip_file.extractall(d)
+    for name in zip_file.namelist():
+        try:
+            new_name = name.encode('cp437').decode('gbk')
+            with open(new_name, 'wb') as file:
+                file.write(zip_file.read(name))
+        except:
+            zip_file.extract(name)
     zip_file.close()
 
 
