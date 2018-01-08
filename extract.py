@@ -24,10 +24,13 @@ def extract_zip(f, d):
     for name in zip_file.namelist():
         try:
             new_name = name.encode('cp437').decode('gbk')
+            new_name = os.path.join(d, new_name)
+            if os.path.isdir(new_name) and not os.path.exists(new_name):
+                os.makedirs(new_name)
             with open(new_name, 'wb') as file:
                 file.write(zip_file.read(name))
         except:
-            zip_file.extract(name)
+            zip_file.extract(name, d)
     zip_file.close()
 
 
