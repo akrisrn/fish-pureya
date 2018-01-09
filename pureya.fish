@@ -1,4 +1,4 @@
 function pureya
-    python3 ./pureya.py $argv
+    python3 pureya.py $argv
 end
 
